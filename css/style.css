@@ -1,0 +1,16 @@
+input, textarea{
+    width: 200px;
+    border:1px solid #000;
+    height: 30px;
+}
+textarea{
+    height: 200px;
+}
+button{
+    padding: 10px 20px;
+    border:1px solid #fff;
+}
+
+form p{
+    color:red;
+}

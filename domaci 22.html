@@ -5,198 +5,63 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>Domaci String</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Predrag Nastić">
-        <meta name="description" content="js strings">
-        <meta name="keywords" content="js, javascript, js strings">
 
-        <style>
-            input, textarea{
-                width: 200px;
-                border:1px solid #000;
-                height: 30px;
-            }
-            textarea{
-                height: 200px;
-            }
-            button{
-                padding: 10px 20px;
-                border:1px solid #fff;
-            }
+<head>
+    <title>Domaci String</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Predrag Nastić">
+    <meta name="description" content="js strings">
+    <meta name="keywords" content="js, javascript, js strings">
 
-            form p{
-                color:red;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container clearfix">
-            
-            <form  method="POST" action="">
-                <div class="form__elemnt">
-                    <label for="news-title">News title</label><br>
-                    <input type="text" name="news-title" value="" id="news-title">
-                    <p id="error-title"></p>
-                </div>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
 
-                <div class="form__elemnt">
-                    <label for="news-text">News text</label><br>
-                    <textarea name="news-text" rows="8" cols="80" id="news-text"></textarea>
-                    <p id="error-text"></p>
-                </div>
+<body>
+    <div class="container clearfix">
 
-                <div class="form__elemnt">
-                    <label for="news-link">News link</label><br>
-                    <input type="text" name="news-link" value="" id="news-link">
-                    <p id="error-link"></p>
-                </div>               
-
-                <div class="form__elemnt">
-                    <label for="news-author">Author</label><br>
-                    <input type="text" name="news-author" value="" id="news-author">
-                    <p id="error-author"></p>
-                </div>
-
-                <div class="form__elemnt">
-                    <label for="email">Author Email</label><br>
-                    <input type="text" name="email" value="" id="email">
-                    <p id="error-email"></p>
-                </div>
-
-                <div class="form__elemnt">
-                    <button id="enter" type='button' onclick="postNews();">Display</button>
-                </div>
-            </form>
-
-            <div id="content">               
-
+        <form method="POST" action="">
+            <div class="form__elemnt">
+                <label for="news-title">News title</label><br>
+                <input type="text" name="news-title" value="" id="news-title">
+                <p id="error-title"></p>
             </div>
+
+            <div class="form__elemnt">
+                <label for="news-text">News text</label><br>
+                <textarea name="news-text" rows="8" cols="80" id="news-text"></textarea>
+                <p id="error-text"></p>
+            </div>
+
+            <div class="form__elemnt">
+                <label for="news-link">News link</label><br>
+                <input type="text" name="news-link" value="" id="news-link">
+                <p id="error-link"></p>
+            </div>
+
+            <div class="form__elemnt">
+                <label for="news-author">Author</label><br>
+                <input type="text" name="news-author" value="" id="news-author">
+                <p id="error-author"></p>
+            </div>
+
+            <div class="form__elemnt">
+                <label for="email">Author Email</label><br>
+                <input type="text" name="email" value="" id="email">
+                <p id="error-email"></p>
+            </div>
+
+            <div class="form__elemnt">
+                <button id="enter" type='button' onclick="postNews();">Display</button>
+            </div>
+        </form>
+
+        <div id="content">
+
         </div>
+    </div>
 
-        <script>
-            //-UTILITY FUNKCIJE :
-            function getInputData(id) {
-                return document.getElementById(id).value;
-            }
+    <script src="./js/app.js"></script>
+</body>
 
-            function clearInputData(id) {
-                document.getElementById(id).value = '';
-            }
-            //---style funkcije
-            function addRedBorder(id) {
-                document.getElementById(id).setAttribute("style", "border-color: red; border-width: 2px;");
-            }
-
-            function addBlackBorder(id) {
-                document.getElementById(id).setAttribute("style", "border-color: #000; border-width: 1px;");
-            }
-
-            //-GLAVNA FUNKCIJA:
-            function postNews() {
-                //---check news title
-                let newsTitle = getInputData('news-title');
-                let newsTitleError = '';
-
-                newsTitleError += (newsTitle.length === 0) ? 'Naslov vesti je obavezno polje \n' : '';
-                newsTitleError += (newsTitle.length < 3 || newsTitle.length > 50) ? 'Naslov vesti mora imati izmedju 3 i 50 karaktera' : '';
-
-                if (newsTitleError.length > 0) {
-                    document.getElementById('error-title').innerText = newsTitleError;
-                    addRedBorder('news-title');
-                } else {
-                    document.getElementById('error-title').innerText = '';
-                    addBlackBorder('news-title');
-                }
-
-                //---check news text
-                let newsText = getInputData('news-text');
-                let newsTextError = '';
-
-                newsTextError += (newsText.length === 0) ? 'Tekst vesti je obavezno polje \n' : '';
-                newsTextError += (newsText.length < 10 || newsText.length > 250) ? 'Tekst vesti mora imati izmedju 10 i 250 karaktera' : '';
-
-                if (newsTextError.length > 0) {
-                    document.getElementById('error-text').innerText = newsTextError;
-                    addRedBorder('news-text');
-                } else {
-                    document.getElementById('error-text').innerText = '';
-                    addBlackBorder('news-text');
-                }
-
-                //---check news link
-                let newsLink = getInputData('news-link').trim();
-                let newsLinkError = '';
-
-                newsLinkError += (newsLink.length === 0) ? 'Link vesti je obavezno polje \n' : '';
-                newsLinkError += (newsLink.length < 10) ? 'Link vesti mora imati minimum 10 karaktera \n' : '';
-                newsLinkError += !(newsLink.startsWith('http://')) ? 'Link vesti mora poceti sa http://' : '';
-
-                if (newsLinkError.length > 0) {
-                    document.getElementById('error-link').innerText = newsLinkError;
-                    addRedBorder('news-link');
-                } else {
-                    document.getElementById('error-link').innerText = '';
-                    addBlackBorder('news-link');
-                }
-
-                //---check news author name
-                let newsAuthor = getInputData('news-author');
-                let newsAuthorError = '';
-
-                newsAuthorError += (newsAuthor.length > 0 && (newsAuthor.length < 3 || newsAuthor.length > 20))
-                        ? 'Ime autora mora sadrzati izmedju 3 i 20 karaktera' : '';
-
-                if (newsAuthorError.length > 0) {
-                    document.getElementById('error-author').innerText = newsAuthorError;
-                    addRedBorder('news-author');
-                } else {
-                    document.getElementById('error-author').innerText = '';
-                    addBlackBorder('news-author');
-                }
-
-                //---check news author email
-                let authorEmail = getInputData('email').trim();
-                let authorEmailError = '';
-
-                authorEmailError += (authorEmail.length === 0) ? 'Email authora  je obavezno polje \n' : '';
-                authorEmailError += (authorEmail.length < 5 || authorEmail.indexOf('@', 2) < 0) ? 'Molimo unesite validan Email' : '';
-
-                if (authorEmailError.length > 0) {
-                    document.getElementById('error-email').innerText = authorEmailError;
-                    addRedBorder('email');
-                } else {
-                    document.getElementById('error-email').innerText = '';
-                    addBlackBorder('email');
-                }
-
-                //---print news input values
-                if (newsTitleError.length === 0 && newsTextError.length === 0 && newsLinkError.length === 0 &&
-                        newsAuthorError.length === 0 && authorEmailError.length === 0)
-                {
-
-                    let oldNews = document.getElementById('content').innerHTML;
-                    let newNews =
-                            `<h1>${newsTitle}</h1>` +
-                            `<p>${newsText}</p>` +
-                            `<a href="${newsLink}">${newsLink}</a>` +
-                            `<h4> ${authorEmail}</h4>` +
-                            `<p> Autor:${newsAuthor}</p>` +
-                            `<hr/>` +
-                            oldNews;
-
-                    document.getElementById('content').innerHTML = newNews;
-
-                    clearInputData('news-title');
-                    clearInputData('news-text');
-                    clearInputData('news-link');
-                    clearInputData('email');
-                    clearInputData('news-author');
-                }
-            }
-
-        </script>
-    </body>
 </html>
